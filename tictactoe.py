@@ -56,7 +56,6 @@ def display_table(table):
     print(f' {table["1"]} | {table["2"]} | {table["3"]} ')
     print()
     
-# TODO check_win doesn't work on horizontal occasions for 1st and 2nd row
 def check_win(table):
     '''Checks if the player who last played won the game'''
     
@@ -118,20 +117,22 @@ while game_on:
     
     # 1 for Player 1 --- 2 for Player 2
     turn = 1
-    while not check_win(table):
+    while not check_win(table) and turn < 10:
         
         field_chosen = player_input(table, turn)
         
-        if turn == 1:
+        if turn % 2 == 1:
             table[f'{field_chosen}'] = player1
-            turn = 2
         else:
             table[f'{field_chosen}'] = player2
-            turn = 1
         
+        turn += 1      
         display_table(table)
+        
     
-    if turn == 1:
+    if not check_win(table) and turn == 10:
+        print('IT\'S A DRAW!\n')
+    elif turn % 2 == 1:
         print('PLAYER 2 WINS! CONGRATS!\n')
     else:
         print('PLAYER 1 WINS! CONGRATS!\n')
