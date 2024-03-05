@@ -11,6 +11,7 @@
 
 def init_game():
     '''Initializes the table and prints the instruction.'''
+    
     print('The game can begin!\n')
     
     print('You play by picking numbers which represent fields of the table.\n')
@@ -26,13 +27,35 @@ def init_game():
 
 def display_table(table):
     '''Prints the current status of the table.'''
+    
     print('Current status of the table:\n')
     print(f' {table["7"]} | {table["8"]} | {table["9"]} ')
     print('-----------')
     print(f' {table["4"]} | {table["5"]} | {table["6"]} ')
     print('-----------')
     print(f' {table["1"]} | {table["2"]} | {table["3"]} ')
+    
+    
+def check_win(table):
+    '''Checks if the player who last played won the game'''
+    
+    for i in range(1, 4):
+        # check for horizontal and vertical win
+        if table[f'{i}'] == table[f'{i + 1}'] == table[f'{i + 2}'] != ' ':
+            return True
+        if table[f'{i}'] == table[f'{i + 3}'] == table[f'{i + 6}'] != ' ':
+            return True
+    
+    # check for diagonal win
+    if table['1'] == table['5'] == table['9'] != ' ':
+        return True
+    if table['3'] == table['5'] == table['7'] != ' ':
+        return True
+    
+    return False
+    
 
+# main function
 
 print('Welcome to Tic-Tac-Toe game!\n')
 
@@ -65,6 +88,11 @@ while game_on:
     # display the table
     
     display_table(table)
+    
+    # players make their moves until someone wins
+    
+    while not check_win(table):
+        pass
     
     game_on = False
         
