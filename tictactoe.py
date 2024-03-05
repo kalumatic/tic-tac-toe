@@ -9,6 +9,26 @@
 # -----------
 #  1 | 2 | 3
 
+def choose_sides():
+    '''Assigns sides to players.'''
+    
+    player1 = ''
+    player2 = ''
+    
+    while player1 not in ('x', 'X', 'o', 'O'):
+        player1 = input('Player 1, choose X or O: ')
+    
+    player1 = player1.upper()
+    
+    if player1 == 'X':
+        player2 = 'O'
+    else:
+        player2 = 'X'
+        
+    print(f'OK! Player 2 is {player2} then!\n')
+    
+    return player1, player2
+
 def init_game():
     '''Initializes the table and prints the instruction.'''
     
@@ -65,21 +85,7 @@ while game_on:
     
     # Player 1 gets to choose X or O, Player 2 gets assigned the remaining one
 
-    player1 = ''
-    player2 = ''
-    while player1 not in ('x', 'X', 'o', 'O'):
-        player1 = input('Player 1, choose X or O: ')
-    
-    player1 = player1.upper()
-    
-    if player1 == 'X':
-        player2 = 'O'
-    else:
-        player2 = 'X'
-        
-    print(f'OK! Player 2 is {player2} then!\n')
-    
-    ############################################
+    player1, player2 = choose_sides()
     
     # start of the game
     
@@ -91,8 +97,11 @@ while game_on:
     
     # players make their moves until someone wins
     
+    # 1 for Player 1 --- 2 for Player 2
+    turn = 1
     while not check_win(table):
-        pass
+        
+        
     
     game_on = False
         
