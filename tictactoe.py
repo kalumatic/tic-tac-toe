@@ -54,16 +54,17 @@ def display_table(table):
     print(f' {table["4"]} | {table["5"]} | {table["6"]} ')
     print('-----------')
     print(f' {table["1"]} | {table["2"]} | {table["3"]} ')
+    print()
     
-    
+# TODO check_win doesn't work on horizontal occasions for 1st and 2nd row
 def check_win(table):
     '''Checks if the player who last played won the game'''
     
     for i in range(1, 4):
         # check for horizontal and vertical win
-        if table[f'{i}'] == table[f'{i + 1}'] == table[f'{i + 2}'] != ' ':
+        if table[f'{1 + (i - 1) * 3}'] == table[f'{2 + (i - 1) * 3}'] == table[f'{3 + (i - 1) * 3}'] and table[f'{1 + (i - 1) * 3}'] != ' ':
             return True
-        if table[f'{i}'] == table[f'{i + 3}'] == table[f'{i + 6}'] != ' ':
+        if table[f'{i}'] == table[f'{i + 3}'] == table[f'{i + 6}'] and table[f'{i}'] != ' ':
             return True
     
     # check for diagonal win
@@ -74,9 +75,27 @@ def check_win(table):
     
     return False
     
+    
+def player_input(table, turn):
+    '''Retrieves the field that the player has chosen.'''
+    
+    field = 0
+    while field not in range(1, 10):
+        try:
+            field = int(input(f'Player {turn}, choose one of the remaining fields: '))
+            if field not in range(1, 10):
+                print('That field doesn\'t exist! Try again.')
+            elif table[f'{field}'] != ' ':
+                print('That field is occupied! Try again.')
+                field = 0
+        except ValueError:
+            print('Not a number! Try again.')
+    
+    return field
 
 # main function
 
+print()
 print('Welcome to Tic-Tac-Toe game!\n')
 
 game_on = True
@@ -101,11 +120,22 @@ while game_on:
     turn = 1
     while not check_win(table):
         
+        field_chosen = player_input(table, turn)
         
+        if turn == 1:
+            table[f'{field_chosen}'] = player1
+            turn = 2
+        else:
+            table[f'{field_chosen}'] = player2
+            turn = 1
+        
+        display_table(table)
+    
+    if turn == 1:
+        print('PLAYER 2 WINS! CONGRATS!\n')
+    else:
+        print('PLAYER 1 WINS! CONGRATS!\n')
     
     game_on = False
-        
-            
-
 
 
