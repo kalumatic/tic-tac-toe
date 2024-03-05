@@ -92,6 +92,25 @@ def player_input(table, turn):
     
     return field
 
+
+def play_on():
+    '''
+    Checks if players wish to play another game.
+    '''
+    
+    answer = ''
+    
+    while answer not in ('Y', 'y', 'N', 'n'):
+        answer = input('Do you want to play again (Y/N)? ')
+        
+    if answer.lower() == 'n':
+        print('Goodbye!\n')
+        return False
+    else:
+        print('Alright then!\n')
+        return True
+    
+
 # main function
 
 print()
@@ -136,7 +155,7 @@ while game_on:
         print('PLAYER 2 WINS! CONGRATS!\n')
     else:
         print('PLAYER 1 WINS! CONGRATS!\n')
-    
-    game_on = False
+            
+    game_on = play_on()
 
 
