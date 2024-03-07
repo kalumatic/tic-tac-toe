@@ -9,6 +9,7 @@
 # -----------
 #  1 | 2 | 3
 
+
 def choose_sides():
     '''Assigns sides to players.'''
     
@@ -28,6 +29,7 @@ def choose_sides():
     print(f'OK! Player 2 is {player2} then!\n')
     
     return player1, player2
+
 
 def init_game():
     '''Initializes the table and prints the instruction.'''
@@ -55,6 +57,7 @@ def display_table(table):
     print('-----------')
     print(f' {table["1"]} | {table["2"]} | {table["3"]} ')
     print()
+    
     
 def check_win(table):
     '''Checks if the player who last played won the game'''
@@ -110,6 +113,7 @@ def play_on():
         print('Alright then!\n')
         return True
     
+
 
 # main function
 
